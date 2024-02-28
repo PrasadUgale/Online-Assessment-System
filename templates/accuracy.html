@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block title %}Accuracy{% endblock %}
+
+{% block content %}
+<script>
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        exportEnabled: true,
+        theme: "dark2",
+        title:{
+            text: "Accuracy of Different Algorithms"
+        },
+          axisY: {
+          includeZero: true
+        },
+        data: [{
+            type: "column",
+            indexLabelFontColor: "#5A5757",
+              indexLabelFontSize: 16,
+            indexLabelPlacement: "outside",
+            dataPoints: [
+                { label: "Random Forest", y: 99 },
+                { label: "Logistic Regression", y: 80 },
+                { label: "SVM", y: 97 },
+                { label: "Decision Tree", y: 99 },
+                { label: "KNN", y: 79 },
+                { label: "Neural Network", y: 92 }
+            ]
+        }]
+    });
+    chart.render();
+    
+    }
+    </script>
+    </head>
+    <body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+{% endblock %}
+
+
+

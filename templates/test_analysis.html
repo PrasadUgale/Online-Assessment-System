@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block title %}Test Analysis{% endblock %}
+
+{% block content %}
+
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+  theme: "dark2", 
+  animationEnabled: true,
+  exportEnabled: true,
+  title: {
+    text: "Test Analysis"
+  },
+  axisX: {
+    margin: 10,
+    labelPlacement: "inside",
+    tickPlacement: "inside"
+  },
+  axisY2: {
+    title: "Score (in Percentage)",
+    titleFontSize: 14,
+    includeZero: true,
+    suffix: "%"
+  },
+  data: [{
+    type: "bar",
+    axisYType: "secondary",
+    indexLabel: "{y}",
+    dataPoints: [
+      {% for i, j in result.items() %}
+          { label: "{{i}}", y: {{(j[0]/j[1])*100}} },
+      {% endfor %}
+    ]
+  }]
+});
+chart.render();
+  
+}
+</script>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<br><br>
+<div>
+  Number of Students Attempted Quiz : {{total_std}}  <br>
+  Average Score of Test :  {{avg}}  <br>
+  Get all Students Score : <a href="{{ url_for('students_test_score', test_id=test_id) }}">Click Here</a>
+</div>
+{% endblock %}

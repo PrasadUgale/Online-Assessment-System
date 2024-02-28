@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}Learner Prediction System{% endblock %}
+
+{% block content %}
+<h2>Learner Prediction System</h2>
+{% if session.logged_in %}
+    <h3>Greetings {{session.username}}</h3>
+{% endif %}
+{% if session.access == 'a' %}
+Refresh System : <a href="{{url_for('refresh_learner_system')}}" class="btn btn-danger">Click Here</a>
+<div>
+    Select Course
+    <hr>
+    <ul>
+        {% for i in course %}
+            <li>   <a href="{{url_for('learner_system', csid=i['csid'])}}">{{i['course_name']}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Student Name</th>
+            <th> Learner Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in response %}
+        <tr>
+            <td>{{i['username']}}</td>
+            <td>
+                {% if i['learner_type']== 1 %}
+                    Active Learner
+                {% else %}
+                    Hard Worker
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+
+
+
+{% endif %}
+{% endblock %}

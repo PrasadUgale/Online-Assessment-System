@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% block title %}Subject Analysis{% endblock %}
+
+{% block content %}
+<div> 
+    <a href={{ url_for('student_view_subject_analysis', subject=subject, type='subtopic')}}><button class="btn btn-primary">Subtopic wise</button></a>
+    <a href={{ url_for('student_view_subject_analysis', subject=subject, type='test') }}> <button class="btn btn-primary">Test wise</button></a>
+</div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+{% if type=="test" %}
+
+<div><script>
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title:{
+            text: "Test Wise Performance of {{subject}} for {{session['id']}}"
+        },	
+        axisY: {
+            title: "Score in Percentage",
+            titleFontColor: "#4F81BC",
+            lineColor: "#4F81BC",
+            labelFontColor: "#4F81BC",
+            tickColor: "#4F81BC"
+        },
+        data: [{
+            type: "line",
+            name: "Test id",
+            legendText: "test id",
+            showInLegend: true, 
+            dataPoints:[
+            {% for i, j in result.items() %}
+                {% if i not in test %}
+                    { label: "{{i}}", y: 0},
+                {% else %}
+                        { label: "{{i}}", y: {{(test[i][0]/test[i][1])*100}} },
+                {% endif %}
+            {% endfor %}
+            ]
+        },
+        {
+		type: "line",
+		showInLegend: true,
+		name: "Class Average",
+		lineDashType: "dash",
+		dataPoints: [
+        {% for i, j in result.items() %}
+                        { label: "{{i}}", y: {{(j[0]/j[1])*100}} },
+            {% endfor %}
+		]
+	}],
+        
+
+    });
+    chart.render();
+    }
+    </script>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+   
+</div>
+{% endif %}
+
+
+{% if type=="subtopic" %}
+<div><script>
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title:{
+            text: "Subtopic Wise Performance of {{subject}} for {{session['username']}}"
+        },	
+        axisY: {
+            title: "Score in Percentage",
+            titleFontColor: "#4F81BC",
+            lineColor: "#4F81BC",
+            labelFontColor: "#4F81BC",
+            tickColor: "#4F81BC"
+        },
+        data: [{
+            type: "column",
+            name: "Your Score",
+            legendText: "Your Score",
+            showInLegend: true, 
+            dataPoints:[
+            {% for i, j in user.items() %}
+                    { label: "{{i}}", y: {{(j[0]/j[1])*100}} },
+            {% endfor %}
+            ]
+        },
+        {
+            type: "column",	
+            name: "Class Average",
+            legendText: "Class Average",
+            axisYType: "secondary",
+            showInLegend: true,
+            dataPoints:[
+            {% for i, j in result.items() %}
+                    { label: "{{i}}", y: {{(j[0]/j[1])*100}} },
+            {% endfor %}
+            ]
+        }]
+    });
+    chart.render();
+    }
+    </script>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+</div> 
+{% endif %}
+<div>
+<h6>Recommended Material to Study</h6>
+<ul>
+    {% for i, j in recommend.items() %}
+                <li>
+                <a href="{{j}}">{{i}}</a>
+            </li>
+    {% endfor %}
+</ul>
+</div>
+
+
+{% endblock %}

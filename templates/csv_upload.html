@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1> Upload Questions to database</h1><br>
+    <h5>Format: (question type, subject, subtopic, Question, correct answer, additional option, additional option, additional option)</h5>
+    <form method="POST" action="" enctype="multipart/form-data">
+        <p><input type="file" name="file"></p>
+        <p><input type="submit" value="Submit"></p>
+      </form>
+</div>
+
+{% endblock %}

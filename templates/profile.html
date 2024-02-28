@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h2>Profile Page</h2>
+<br>
+<br>
+<section>
+  <div class="container py-10 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-12 col-xl-4">
+  
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body text-center">
+              <div class="mt-3 mb-4">
+                <img
+                  src="data:image/jpeg;base64,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"
+                   class="rounded-circle img-fluid" style="width: 100px;"
+                />
+              </div>
+              <h4 class="mb-2">{{ account['username'] }}</h4>
+              <p class="text-muted mb-4"> {{ account['email'] }} </p>
+              {% if (account['access']=='t') %}
+                
+                <div>
+                  
+                    <form action="{{ url_for('teachersubject') }}" method="post" autocomplete="off">
+                        <label for="subject">
+                </label>
+                <select id="subject" name="subject">
+                  <option value="{{subject['subject1']}}">{{subject['subject1']}}</option>
+                  <option value="{{subject['subject2']}}">{{subject['subject2']}}</option>
+                            <option value="{{subject['subject3']}}">{{subject['subject3']}}</option>
+                  <option value="{{subject['subject4']}}">{{subject['subject4']}}</option>
+                            <option value="{{subject['subject5']}}">{{subject['subject5']}}</option>
+                </select>
+                        <input type="submit" value="Select">
+                    </form>
+
+                </div>
+                {% endif %}
+
+{% if (session['access']=='s') %}
+              <a href="{{url_for('new_user')}}"><button type="button" class="btn btn-primary btn-rounded btn-lg">
+                Update Information
+              </button></a>
+  {% endif %}
+              <div class="d-flex justify-content-between text-center mt-5 mb-2">
+                <div>
+                  <p class="mb-2 h5">{{session['id']}}</p>
+                  <p class="text-muted mb-0">Student Id</p>
+                </div>
+                <div class="px-3">
+                  <p class="mb-2 h5">{{session['csid']}}</p>
+                  <p class="text-muted mb-0">Course ID</p>
+                </div>
+                {% if session['access'] == 't' %}
+                <div>
+                  <p class="mb-2 h5">{{account['teacher_subject']}}</p>
+                  <p class="text-muted mb-0">Teacher Subject</p>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

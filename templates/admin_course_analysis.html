@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h2>Home Page</h2>
+{% if session.loggedin %}
+
+    <h6>Welcome back {{session.username}}!</h6>
+
+<div>
+   <h6>Teachers for th given course:</h6>
+   <div class="card">
+   <table class="table table-borderless table-hover">
+       <thead>
+       <tr>
+           <th> Name </th>
+           <th> ID </th>
+           <th> Email </th>
+           <th> Subject </th>
+       </tr>
+    </thead>
+    <tbody>
+   {% for i in accounts %}
+    {% if i['access']=='t' %}
+    
+       <tr>
+           <td>{{i['username']}}</td>
+           <td>{{i['id']}}</td>
+           <td>{{i['email']}}</td>
+           <td>{{i['teacher_subject']}}</td>
+       </tr>
+    {% endif %}
+   {% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+<div>
+    <h6>Students enrolled for the given course:</h6>
+    <div class="card">
+    <table class="table table-borderless table-hover">
+        <thead>
+        <tr>
+            <th> Name </th>
+            <th> ID </th>
+            <th> Email </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in accounts %}
+     {% if i['access']=='s' %}
+        <tr>
+            <td>{{i['username']}}</td>
+            <td>{{i['id']}}</td>
+            <td>{{i['email']}}</td>
+        </tr>
+     {% endif %}
+    {% endfor %}
+</tbody>
+</table>
+</div>
+ </div>
+ <div>
+     Analse Subject progress of this course
+     <hr>
+     <ul>
+         {% if course['subject1'] %}<li>   <a href="{{url_for('administrator_subject_analysis', subject=course['subject1'])}}"class="btn btn-danger">{{course['subject1']}}</a></li> <br>{% endif %}
+         {% if course['subject2'] %}<li>  <a href="{{url_for('administrator_subject_analysis', subject=course['subject2'])}}"class="btn btn-info">{{course['subject2']}}</a></li><br> {% endif %}
+         {% if course['subject3'] %}<li>   <a href="{{url_for('administrator_subject_analysis', subject=course['subject3'])}}"class="btn btn-success">{{course['subject3']}}</a></li> <br>{% endif %}
+         {% if course['subject4'] %}<li>  <a href="{{url_for('administrator_subject_analysis', subject=course['subject4'])}}"class="btn btn-dark">{{course['subject4']}}</a></li><br> {% endif %}
+         {% if course['subject5'] %}<li>   <a href="{{url_for('administrator_subject_analysis', subject=course['subject5'])}}"class="btn btn-primary">{{course['subject5']}}</a></li><br> {% endif %}
+     </ul>
+ </div>
+         
+
+{% endif %}
+{% endblock %}

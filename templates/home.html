@@ -1,0 +1,120 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<script>
+    alert(msg)
+</script>
+
+<h2>Home Page</h2>
+{% if session.loggedin %}
+
+    <h4>Welcome back {{session.username}}!</h4>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 b-r padding_bottom_70" >
+      <p class="margin_top_600px">
+          <div>
+        <h4>Scheduled Test</h4><br>
+        <div class="table-responsive" style="overflow:scroll; height:400px;">
+            <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Subject</th>
+                <th> Number of Question</th>
+                <th>Deadline</th>
+                <th> Attempt Test</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for i in test %}
+            {% if i['is_active']== 1 %}
+            <tr>
+                <td>
+                    {{i['subject']}}
+                </td>
+                <td>
+                    {{i['total_question']}}
+                </td>
+                <td>
+                    {{i['end_at']}}
+                </td>
+                <td>
+                    <a href="{{ url_for('attempt_test', test_id=i['test_id']) }}"><button type="button" class="btn btn-outline-primary btn-sm">Click Here</button></a>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+        </table>
+        </div>
+      </p>
+    </div>
+    </div>
+    
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 b-r padding_bottom_70" >
+      <p class="margin_top_600px">
+        <div>
+            <h4>Test Ended</h4><br>
+            <div class="table-responsive" style="overflow:scroll; height:400px;">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th> Number of Question</th>
+                    <th>Scheduled</th>
+                    <th>Deadline</th>
+                    <th> Score </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in test %}
+                {% if i['is_active']== 0 %}
+                <tr>
+                    <td>
+                        {{i['subject']}}
+                    </td>
+                    <td>
+                        {{i['total_question']}}
+                    </td>
+                    <td>
+                        {{i['created_at']}}
+                    </td>
+                    <td>
+                        {{i['end_at']}}
+                    </td>
+                    <td>
+                        {{i['score']}}
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+            </table>
+
+        </div>
+      </p>  
+    </div>
+    </div>
+
+    Analyse your Progress: 
+    <form action="{{ url_for('get_student_view_subject_analysis')}}" method="post" autocomplete="off">
+        <label for="subject">
+        </label>
+        <select id="subject" name="subject">
+            <option value="{{subject['subject1']}}">{{subject['subject1']}}</option>
+            <option value="{{subject['subject2']}}">{{subject['subject2']}}</option>
+            <option value="{{subject['subject3']}}">{{subject['subject3']}}</option>
+            <option value="{{subject['subject4']}}">{{subject['subject4']}}</option>
+            <option value="{{subject['subject5']}}">{{subject['subject5']}}</option>
+        </select>
+        <input type="submit" value="Select">
+    </form>
+</div>
+
+
+{{msg}}
+{% endif %}
+{% endblock %}

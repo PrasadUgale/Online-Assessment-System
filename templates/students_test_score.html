@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div>
+    <table class="table table-over">
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Score </th>
+            <th> Total </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i,j in response.items() %}
+            <tr>
+                <td>{{i}}</td>
+                <td>{{j}}</td>
+                <td>{{total['total_question']}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}

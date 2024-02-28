@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block title %}Administrator Dashboard{% endblock %}
+
+{% block content %}
+
+{% if session.logged_in %}
+    <h3>Greetings {{session.username}}</h3>
+{% endif %}
+{% if session.access == 't' %}
+
+
+   <br>
+    <center><h3>Add Question</h3></center>
+<div class="card">
+<div>
+    <form action="{{ url_for('add_question') }}" method="post" autocomplete="off">
+        <table class="table table-borderless">
+            <tr>
+                <th>Question:- </th>
+                <td>
+                    <label for="question">
+                    </label>
+                    <textarea name="question" id="question" required></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>Correct Answer:- </th>
+                <td>
+                    <label for="answer"></label>
+                    <input type="text" name="answer" id="answer" required>
+                </td>
+            </tr>
+            <tr>
+                <th>Additional Option:- </th>
+                <td><label for="op1"></label>
+                    <input type="text" name="op1" id="op1" ></td>
+            </tr>
+            <tr>
+                <th>Additional Option:- </th>
+                <td><label for="op2"></label>
+                    <input type="text" name="op2" id="op2" ></td>
+            </tr>
+            <tr>
+                <th>Additional Option:- </th>
+                <td><label for="op3"></label>
+                    <input type="text" name="op3" id="op3" ></td>
+            </tr>
+            <tr>
+                <th>Subject:- </th>
+                <td><label for="subject"></label>
+                {{account['teacher_subject']}}
+                <input type="hidden" name="subject" id="subject" value="{{account['teacher_subject']}}"></td>
+            </tr>
+            <tr>
+                <th>Subtopic:- </th>
+                <td>
+                    <label for="subtopic"></label>
+                    <input type="text" name="subtopic" id="subtopic" >
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="type" id="type" value="mcq">
+        <br>
+        
+        <input class="btn btn-success" type="submit" value="Add Question">
+    </form>
+    <br><br>
+    <div>
+    <a href="{{url_for('csv_upload')}}"><button class="btn btn-danger">Upload a CSV FIle</button> </a>
+</div>
+</div>
+</div>
+{% endif %}
+{% endblock %}

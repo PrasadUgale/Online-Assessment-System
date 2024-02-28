@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+        <br>
+        <div>
+        <center>
+            <h3>These are Currently available Courses</h3>
+        </center>
+    </div>
+        <br>
+        <center>
+        <table class="table table-hover">
+            <thread>
+                <tr style="color: green; ">    
+                    <th scope="col">Course Id</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Subject 1</th>
+                    <th scope="col">Subject 2</th>
+                    <th scope="col">Subject 3</th>
+                    <th scope="col">Subject 4</th>
+                    <th scope="col">Subject 5</th>
+                </tr>
+            </thread>
+            <tbody>
+            {%for i in courses%}
+            <tr>
+                <td>{{i['csid']}}</td>
+                <td>{{i['course_name']}}</td>
+                <td>{{i['subject1']}}</td>
+                <td>{{i['subject2']}}</td>
+                <td>{{i['subject3']}}</td>
+                <td>{{i['subject4']}}</td>
+                <td>{{i['subject5']}}</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+            </table>
+        </center>
+    <br>
+    <div>
+    <h5>Add New Course:- </h5><br>
+        <form action="{{ url_for('availablecourse') }}" method="post" autocomplete="off">
+            
+            <label for="course_name">
+            </label>
+            Course Name : <input type="text" name="course_name" id="course_name" required>
+            <br>
+
+            <label for="subject1">
+                
+            </label>
+            Subject Name: <input type="text" name="subject1" id="subject1" required>
+            <br>
+
+            <label for="subject2">
+                
+            </label>
+            Subject Name: <input type="text" name="subject2" id="subject2" required>
+            <br>
+
+            <label for="subject3">
+                
+            </label>
+            Subject Name: <input type="text" name="subject3" id="subject3" >
+            <br>
+
+            <label for="subject4">
+                
+            </label>
+            Subject Name: <input type="text" name="subject4" id="subject4" >
+            <br>
+
+            <label for="subject5">
+                
+            </label>
+            Subject Name: <input type="text" name="subject5" id="subject5" >
+            <br>
+
+            <div class="msg">{{ msg }}</div>
+            <br>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" value="Add Course">
+        </form>
+
+    </div>
+
+
+</main>
+{% endblock %}

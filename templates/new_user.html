@@ -1,0 +1,173 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h3>New User Form</h3>
+
+<div class="card">
+    <form action="{{ url_for('new_user') }}" method="post" autocomplete="off">
+    <table class="table table-borderless">
+        <tr>
+            <td>Gender:- </td>
+            <td><input type="radio" id="gender" name="gender" value="0">
+                <label for="gender" style="color:black;background-color: white;"> Male  </label>
+            </td>
+            <td><input type="radio" id="gender" name="gender" value="1">
+                <label for="gender" style="color:black;background-color: white;"> Female  </label><br>   
+            </td>
+        </tr>
+        <tr>
+            <td>Family Size:- </td>
+            <td><input type="radio" id="famsize" name="famsize" value="0">
+                <label for="famsize" style="color:black;background-color: white;"> Greater than 3  </label>
+            </td>
+            <td><input type="radio" id="famsize" name="famsize" value="1">
+                <label for="famsize" style="color:black;background-color: white;"> 3 Or Less  </label><br>   
+            </td>
+        </tr>
+        <tr>
+            <td>Mother Education:- </td>
+            <td colspan="2">
+                <select id="Medu" name="Medu">
+                    <option value="0">None</option>
+                    <option value="1">Primary Education(1-4th)</option>
+                    <option value="2">Secondary Education(5-9th)</option>
+                    <option value="3">Higher Secondary(10-12th)</option>
+                    <option value="4">Higher Education</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Mother Job:- </td>
+            <td colspan="2">
+                <select id="Mjob" name="Mjob">
+                    <option value="0">Educational Sector</option>
+                    <option value="1">Health Sector</option>
+                    <option value="2">Service</option>
+                    <option value="3">at_home</option>
+                    <option value="4">other</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Father Education:- </td>
+            <td colspan="2">
+                <select id="Fedu" name="Fedu">
+                    <option value="0">None</option>
+                    <option value="1">Primary Education(1-4th)</option>
+                    <option value="2">Secondary Education(5-9th)</option>
+                    <option value="3">Higher Secondary(10-12th)</option>
+                    <option value="4">Higher Education</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Father Job:- </td>
+            <td colspan="2">
+                <select id="Fjob" name="Fjob">
+                    <option value="0">Educational Sector</option>
+                    <option value="1">Health Sector</option>
+                    <option value="2">Service</option>
+                    <option value="3">at_home</option>
+                    <option value="4">other</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Guardian:- </td>
+            <td colspan="2">
+                <select id="guardian" name="guardian">
+                    <option value="0">Mother</option>
+                    <option value="1">Father</option>
+                    <option value="2">Other</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>School Support:- </td>
+            <td><input type="radio" id="schoolsup" name="schoolsup" value="1"> YES</td>
+            <td><input type="radio" id="schoolsup" name="schoolsup" value="0"> NO </td>
+        </tr>
+        <tr>
+            <td>Family Support:- </td>
+            <td><input type="radio" id="famsup" name="famsup" value="1"> YES</td>
+            <td><input type="radio" id="famsup" name="famsup" value="0"> NO </td>
+        </tr>
+        <tr>
+            <td>Extra Curricular Activities:- </td>
+            <td><input type="radio" id="activities" name="activities" value="1"> YES</td>
+            <td><input type="radio" id="activities" name="activities" value="0"> NO </td>
+        </tr>
+        <tr>
+            <td>Nursery:- </td>
+            <td><input type="radio" id="nursery" name="nursery" value="1"> YES</td>
+            <td><input type="radio" id="nursery" name="nursery" value="0"> NO </td>
+        </tr>
+        <tr>
+            <td>Higher:- </td>
+            <td><input type="radio" id="higher" name="higher" value="1"> YES</td>
+            <td><input type="radio" id="higher" name="higher" value="0"> NO </td>
+        </tr>
+        <tr>
+            <td>Social Media:- </td>
+            <td><input type="radio" id="internet" name="internet" value="1"> YES</td>
+            <td><input type="radio" id="internet" name="internet" value="0"> NO </td>
+        </tr>
+        <tr>
+            <td>Home to School Travel Time(in minutes):- </td>
+            <td colspan="2">
+                <select name="traveltime" id="traveltime">
+                    <option value="1">Less than 15 minutes</option>
+                    <option value="2">15 to 30 minutes</option>
+                    <option value="3">30 to 60 minutes</option>
+                    <option value="4">More than 1 hour</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Weekly study time(in Hours):- </td>
+            <td colspan="2"><select name="studytime" id="studytime">
+                <option value="1">Less than 2 hours</option>
+                <option value="2">2 to 5 hours</option>
+                <option value="3">5 to 10 hours</option>
+                <option value="4">More than 10 hours</option>
+          </select></td>
+        </tr>
+        <tr>
+            <td>Free Time:- </td>
+            <td colspan="2"><input type="range" id="freetime" name="freetime" min="1" max="5"></td>
+        </tr>
+        <tr>
+            <td>Go out with Friends:- </td>
+            <td colspan="2"><input type="range" id="gout" name="gout" min="1" max="5"></td>
+        </tr>
+        <tr>
+            <td>Health Status:- </td>
+            <td colspan="2"><input type="range" id="health" name="health" min="1" max="5"></td>
+        </tr>
+        <tr>
+            <td>Attendance:- </td>
+            <td colspan="2"><input type="number" id="attendance" name="attendance" min="1" max="100"></td>
+        </tr>
+        <tr>
+            <td>10th Score:- </td>
+            <td colspan="2"><input type="number" id="ssc" name="ssc" min="1" max="100"></td>
+        </tr>
+        <tr>
+            <td>12th Score:- </td>
+            <td colspan="2"><input type="number" id="hsc" name="hsc" min="1" max="100"></td>
+        </tr>
+        <tr>
+            <td>Average pointer:- </td>
+            <td colspan="2"><input type="number" id="avg_pointer" name="avg_pointer" min="1" max="10"></td>
+        </tr>
+    </table>
+    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">
+    </form>
+</div>
+
+
+
+
+{% endblock %}

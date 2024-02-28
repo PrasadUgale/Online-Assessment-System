@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}Subject Analysis{% endblock %}
+
+{% block content %}
+<div><script>
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title:{
+            text: "Test Wise Student Performance"
+        },	
+        axisY: {
+            title: "Score in Percentage",
+            titleFontColor: "#4F81BC",
+            lineColor: "#4F81BC",
+            labelFontColor: "#4F81BC",
+            tickColor: "#4F81BC"
+        },
+        data: [{
+            type: "line",
+            name: "Test id",
+            legendText: "test id",
+            showInLegend: true, 
+            dataPoints:[
+            {% for i, j in result.items() %}
+                    { label: "{{i}}", y: {{(j[0]/j[1])*100}} },
+            {% endfor %}
+            ]
+        }]
+    });
+    chart.render();
+    }
+    </script>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</div>
+
+
+{% endblock %}

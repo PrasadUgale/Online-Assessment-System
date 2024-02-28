@@ -1,0 +1,33 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if session.loggedin %}
+
+    <h2>Attempt the test</h2>
+
+    <form action="{{ url_for('attempt_test',test_id=test_id)  }}" method="post" autocomplete="off">
+        {% for i in test %}
+        <br>
+        <div class="card">
+            <div class="card-header">
+            Que: {{i[1]}}
+            </div>
+            <div class="card-body">
+            {% for j in i[2] %}
+                <input class="form-check-input" type="radio" id="{{i[0]}}" name="{{i[0]}}" value="{{j}}"> {{j}} <br>
+            {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit Test">
+        <br>
+    </form>
+
+
+{% endif %}
+{% endblock %}

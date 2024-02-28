@@ -1,0 +1,70 @@
+test_analysis.html:
+Using canvas.js if it failed use this:
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+<canvas id="test_analysis" style="width:100%;max-width:700px"></canvas>
+
+
+<script>
+    var xValues = [{% for i, j in result.items() %} "{{i}}", {% endfor %}];
+    var yValues = [{% for i, j in result.items() %} {{(j[0]/j[1])*100}} , {% endfor %}];
+    var barColors = [{% for i in result.items() %}"grey", {% endfor %}];
+    
+    new Chart("test_analysis", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        title: {
+          display: true,
+          text: "Test Analysis"
+        }
+      }
+    });
+</script>
+____________________________________________________________________________________________
+
+
+<div><script>
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title:{
+            text: "Test Wise Performance of {{subject}} for {{session['id']}}"
+        },	
+        axisY: {
+            title: "Score in Percentage",
+            titleFontColor: "#4F81BC",
+            lineColor: "#4F81BC",
+            labelFontColor: "#4F81BC",
+            tickColor: "#4F81BC"
+        },
+        data: [{
+            type: "line",
+            name: "Test id",
+            legendText: "test id",
+            showInLegend: true, 
+            dataPoints:[
+            {% for i, j in test.items() %}
+                    { label: "{{i}}", y: {{(j[0]/j[1])*100}} },
+            {% endfor %}
+            ]
+        }],
+        
+
+    });
+    chart.render();
+    }
+    </script>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+   
+</div>

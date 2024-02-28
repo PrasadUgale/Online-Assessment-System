@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+
+{% block title %}Administrator Dashboard{% endblock %}
+
+{% block content %}
+<h2>Teacher Dashboard</h2>
+{% if session.logged_in %}
+    <h3>Greetings {{session.username}}</h3>
+{% endif %}
+{% if session.access == 't' %}
+
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Update Question Bank</h5>
+          <p class="card-text">If you want to add Question in the database    
+          </p>
+          <a href="{{ url_for('add_question') }}" class="btn btn-primary">Click Here</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Register a Student</h5>
+          <p class="card-text">Create a account of student.</p>
+          <a href="{{ url_for('register') }}" class="btn btn-primary">Click Here</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="card">
+    <script>
+        window.onload = function () {
+        
+        var chart = new CanvasJS.Chart("chartContainer", {
+          theme: "light2", 
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "Subject Analysis"
+          },
+          axisX: {
+            margin: 10,
+            labelPlacement: "inside",
+            tickPlacement: "inside"
+          },
+          axisY2: {
+            title: "Score (in Percentage)",
+            titleFontSize: 14,
+            includeZero: true,
+            suffix: "%"
+          },
+          data: [{
+            type: "bar",
+            axisYType: "secondary",
+            indexLabel: "{y}",
+            dataPoints: [
+              {% for i, j in result.items() %}
+                  { label: "{{i}}", y: {{(j[0]/j[1])*100}} },
+              {% endfor %}
+            ]
+          }]
+        });
+        chart.render();
+          
+        }
+        </script>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</div>
+
+<div class="card">
+    <h5>Schedule a test</h5>
+    <form name="test_schedule" action="{{ url_for('schedule_test') }}" method="post" autocomplete="off">
+        <table>
+            <tr>
+                <td>No of Question: <input type="text" name="quiznum" id="quiznum" required></td>
+                <td>Deadline to attempt: <input type="datetime-local" name="deadline" id="deadline" required></td>
+                <td><input class="btn btn-secondary" type="submit" value="Schedule"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+  
+<div>
+    <div class="table-responsive" style="overflow:scroll; height:400px;">
+        <table class="table table-hover">
+            <thead>
+        <tr>
+            <th> Status </th>
+            <th> Created at</th>
+            <th> Submittion deadline</th>
+            <th> Total Questions</th>
+            <th> Analyze the Test</th>
+        </tr>
+            </thead>
+        <tbody>
+        {% for i in all_test %}
+        <tr>
+            
+            <td>{% if i['is_active'] == 1 %}
+                Active
+                {% else %}
+                Ended
+                {% endif %}
+            </td>
+            <td>{{i['created_at']}}</td>
+            <td>{{i['end_at']}}</td>
+            <td>{{i['total_question']}}</td>
+            <td>
+            <a href="{{ url_for('test_analysis', test_id=i['test_id']) }}"><button type="button" class="btn btn-success">Click Here</button></a>
+        </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+</div>
+
+{% endif %}
+{% endblock %}
